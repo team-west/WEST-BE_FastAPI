@@ -11,6 +11,9 @@ test.txt
 # C extensions
 *.so
 
+# Personal
+keys.py
+
 # Distribution / packaging
 .Python
 build/
