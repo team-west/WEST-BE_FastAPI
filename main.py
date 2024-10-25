@@ -1,16 +1,13 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from mypage.routes import router as mypage_router
 
 app = FastAPI()
 
-class User(BaseModel):
-  user_name: str
-  user_id: str
-  user_gender: str
-  user_phone_number: str
+app.include_router(mypage_router)
 
-@app.get("/user-profile")
-async def profile(user_id: str):
+if __name__ == "__main__":
+  import uvicorn
+  uvicorn.run("main:app", host='0.0.0.0', port=2952, reload=True)
 
 # from fastapi import FastAPI, HTTPException, Depends
 # from sqlalchemy import create_engine, Column, Integer, String
