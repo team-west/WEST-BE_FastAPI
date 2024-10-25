@@ -1,7 +1,24 @@
-from pydantic import BaseModel
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
 
-class User(BaseModel):
-  user_name: str
-  user_id: str
-  user_gender: str
-  user_phone_number: str
+import os
+
+load_dotenv()
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+engine = create_engine(DATABASE_URL)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+Base = declarative_base()
+
+def get_db():
+  db = SessionLocal
+  try:
+    yield db
+  except Exception as e:
+    db.close()
+    return e
+  finally:
+    db.close()
