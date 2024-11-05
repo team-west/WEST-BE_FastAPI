@@ -1,11 +1,13 @@
 from fastapi import FastAPI
-from mypage.routes import router as mypage_router
+from user.routes import router as mypage_router
 
 app = FastAPI()
 
-app.include_router(mypage_router)
+app.include_router(mypage_router.router, tags=['USER'])
 
 if __name__ == "__main__":
+  from user.database.databases import init_db
+  init_db()
   import uvicorn
   uvicorn.run("main:app", host='0.0.0.0', port=2952, reload=True)
 
