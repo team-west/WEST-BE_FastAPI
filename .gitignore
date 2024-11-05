@@ -7,6 +7,7 @@ __pycache__/
 .venv
 test.py
 test.txt
+style_imgs
 
 # C extensions
 *.so
