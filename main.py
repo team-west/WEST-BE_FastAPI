@@ -1,13 +1,22 @@
 from fastapi import FastAPI
 from user.routes import router as mypage_router
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
 app.include_router(mypage_router.router, tags=['USER'])
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 if __name__ == "__main__":
-  from user.database.databases import init_db
-  init_db()
+  from user.database.databases import init_db as make_user_db
+  make_user_db()
   import uvicorn
   uvicorn.run("main:app", host='0.0.0.0', port=2952, reload=True)
 

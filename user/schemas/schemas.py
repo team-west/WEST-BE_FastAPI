@@ -3,10 +3,10 @@ from user.database.enums import genderEnum
 from fastapi import HTTPException, status
 
 class User(BaseModel):
-  id: constr(max_length=30)
-  name: constr(min_length=2, max_length=10)
-  number: constr(min_length=13, max_length=13)
-  password: constr(max_length=100)
+  id: str
+  name: str
+  number: str
+  password: str
   user_gender: genderEnum
   user_styles: str
 
